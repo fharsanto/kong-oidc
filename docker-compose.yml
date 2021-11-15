@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 networks:
   kong-net:
@@ -16,7 +16,7 @@ services:
     networks:
       - kong-net
     ports:
-      - "15432:5432"
+      - "25432:5432"
     environment:
       POSTGRES_DB: api-gw
       POSTGRES_USER: kong
@@ -35,17 +35,18 @@ services:
     build:
       context: kong/
       dockerfile: Dockerfile
-    extra_hosts:
-      - "keycloak-host:10.18.18.118"
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+    #   - "keycloak-host:host-gateway"
     depends_on:
       - kong-db
     networks:
       - kong-net
     ports:
-      - "8000:8000" # Listener
-      - "8001:8001" # Admin API
-      - "8443:8443" # Listener  (SSL)
-      - "8444:8444" # Admin API (SSL)
+      - "28000:8000" # Listener
+      - "28001:8001" # Admin API
+      - "28443:8443" # Listener  (SSL)
+      - "28444:8444" # Admin API (SSL)
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-db
@@ -119,4 +120,4 @@ services:
     depends_on:
       - kong-db
     ports:
-      - "1337:1337"
+      - "21337:1337"

@@ -9,9 +9,6 @@ start:
 prepare_kong:
 	$(MAKE) -C kong init
 
-start_java_client:
-	$(MAKE) -C java-oidc-client run
-
 # For development purposes
 reload_kong:
 	docker-compose down
